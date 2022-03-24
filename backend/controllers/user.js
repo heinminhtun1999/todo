@@ -9,7 +9,7 @@ module.exports.registerUser = async (req, res) => {
     const registeredUser = await User.register(user, password);
     req.login(registeredUser, err => {
         if (err) return next(err);
-        res.status(200).json({ registeredUser, isAuthenticated: req.isAuthenticated() });
+        res.status(200).json( registeredUser );
     });
 }
 

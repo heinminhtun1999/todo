@@ -43,6 +43,10 @@ const boardSchema = new Schema({
     },
     invite_link: {
         token: String,
+        set_password: {
+            type: Boolean,
+            defautl: false
+        },
         password: String
     }
 }, { timestamps: true });
