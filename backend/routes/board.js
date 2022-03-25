@@ -28,15 +28,16 @@ router.post("/", verifyLogin, catchAsync(async (req, res) => {
 }));
 
 router.post("/generate_invite", verifyLogin, catchAsync(async (req, res) => {
-    const { board_id } = req.body;
+    const { board_id, setPassword } = req.body;
     if (!board_id) return res.status(400).send("Board id is required");
     if (!mongoose.isValidObjectId(board_id)) return res.status(400).send("Invalid board id");
     try {
         const board = await Board.findById(board_id).populate("owner");
         if (!board) return res.status(404).send("Board not found");
-        console.log({ board_owner: board.owner, user: req.user.id })
         if (board.owner.id !== req.user.id) return res.status(403).send("You're not the owner of this board");
+        const board_owner = await User.findById(board.owner.id);
         const token = generateToken(board.id, req.user.id);
+
         return res.status(200).json(token)
     } catch (e) {
         throw new ExpressError(e.message, 500);
