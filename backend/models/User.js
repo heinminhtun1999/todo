@@ -20,7 +20,11 @@ const userSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: "Board"
         }
-    ]
+    ],
+    highlighted_boards: [{
+        type: Schema.Types.ObjectId,
+        ref: "Board"
+    }]
 }, { timestamps: true });
 
 userSchema.plugin(passportLocalMongoose, { usernameQueryFields: ["email"] });

@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
+const User = require("./User");
 
 const boardSchema = new Schema({
     title: {
@@ -28,13 +29,9 @@ const boardSchema = new Schema({
             }
         }
     ],
-    highlighted: {
-        type: Boolean,
-        default: false
-    },
     visibility: {
         type: String,
-        enum: ["private", "member", "public"],
+        enum: ["private", "member_only", "public"],
         default: "private"
     },
     background: {
@@ -42,10 +39,18 @@ const boardSchema = new Schema({
         default: "#838C91"
     },
     invite_link: {
-        token: String,
+        link: String,
+        set_password: {
+            type: Boolean,
+            defautl: false
+        },
         password: String
     }
 }, { timestamps: true });
+
+boardSchema.post("findOneAndDelete", async function (data, next) {
+    await User.findByIdAndUpdate(data.owner, { $pull: { boards: data.id } });
+});
 
 const Board = mongoose.model("Board", boardSchema);
 

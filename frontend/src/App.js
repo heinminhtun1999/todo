@@ -65,12 +65,18 @@ function App() {
     }
   }
 
+  const handleCheck = (e) => {
+    console.log(e.target.checked)
+  }
+
   return (
     <div className="App">
       <button onClick={login} >Login</button>
       <button onClick={signup} >SignUp</button>
       <button onClick={logout} >Logout</button>
       <button onClick={checkStatus} >Check</button>
+      <input type={"checkbox"} onChange={handleCheck}></input>
+      <label>Set Password</label>
     </div>
   );
 }

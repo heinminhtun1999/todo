@@ -40,8 +40,9 @@ app.use("/auth", user);
 app.use("/api/boards", board);
 
 app.get("/", (req, res) => {
-    res.send("Hello World")
+    res.redirect("Hello World")
 });
+
 
 app.use((err, req, res, next) => {
     const { statusCode = 500 } = err;
