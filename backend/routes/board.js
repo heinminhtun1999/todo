@@ -79,7 +79,7 @@ router.get("/invite", catchAsync(async (req, res) => {
     if (!token) throw new ExpressError("invitation token is required", 400);
     try {
         const verifiedToken = jwt.verify(token, process.env.TOKEN_SECRET);
-        const board = await Board.findById(verifiedToken.board).populate("owner").select("");
+        const board = await Board.findById(verifiedToken.board).populate("owner");
         return res.status(200).json(board);
     } catch (e) {
         switch (e.message) {
@@ -93,8 +93,6 @@ router.get("/invite", catchAsync(async (req, res) => {
     }
 }));
 
-// const checkPassword = async()
-
 router.post("/invite", verifyLogin, catchAsync(async (req, res) => {
     const { token } = req.query;
     const { password } = req.body;
@@ -103,17 +101,17 @@ router.post("/invite", verifyLogin, catchAsync(async (req, res) => {
         const verifiedToken = jwt.verify(token, process.env.TOKEN_SECRET);
         const board = await Board.findById(verifiedToken.board);
         if (board.owner.equals(req.user.id)) throw new ExpressError("you are the owner of the board. you cannot invite yourself", 400);
-        const board_members = board.board_members.map(member => member.id);
-        if (board_members.includes(req.user.id)) throw new ExpressError("you are already a member of this board", 400);
+        const board_members = board.board_members.filter(member => member.user.equals(req.user.id));
+        if (board_members.length) throw new ExpressError("you are already a member of this board", 400);
         if (board.invite_link.set_password) {
-            if (!password) throw new ExpressError("'password' field is required", 400);
+            if (!password) throw new ExpressError("this invitation is protected with password, enter password in 'password' field", 400);
             const checkPassword = await bcrypt.compare(password, board.invite_link.password);
             if (!checkPassword) throw new ExpressError("wrong invite password", 403);
-            board.board_members.push(req.user);
+            board.board_members.push({user: req.user.id, role: "member"});
             await board.save();
             return res.status(200).json(board);
         }
-        board.board_members.push(req.user);
+        board.board_members.push({user: req.user.id, role: "member"});
         await board.save();
         return res.status(200).json(board);
     } catch (e) {
