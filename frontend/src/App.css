@@ -1,0 +1,16 @@
+@font-face { 
+    font-family: OpenSans; 
+    src: url('./Assets/fonts/OpenSans-Regular.ttf'); 
+} 
+
+@font-face { 
+    font-family: FiraSans; 
+    src: url('./Assets/fonts/FiraSans-Regular.ttf'); 
+} 
+
+* {
+    font-family: "FiraSans", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}

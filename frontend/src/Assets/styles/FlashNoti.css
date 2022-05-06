@@ -1,0 +1,32 @@
+.flash-noti {
+    position: absolute;
+    left: 45%;
+    right: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 160px;
+    padding: 15px;
+    background-color: rgb(96, 179, 96);
+    color: #ffffff;
+    animation: flash-noti 0.5s;
+    top: 40px;
+    z-index: 9;
+}
+
+.close-flash-noti {
+    width: 15px;
+    height: 15px;
+    filter: invert();
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+@keyframes flash-noti {
+    from {
+        top: -100%
+    }
+    to {
+        top: 40px;
+    }
+}

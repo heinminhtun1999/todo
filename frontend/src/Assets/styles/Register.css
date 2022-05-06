@@ -1,0 +1,140 @@
+.register {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e5e5e5;
+    height: 100vh;
+}
+
+.register-content {
+    text-align: center;
+    padding: 2em;
+    background: rgba(255, 255, 255, 0.07);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10.3px);
+    -webkit-backdrop-filter: blur(10.3px);
+    width: 400px;
+}
+
+.register-title {
+    color: #14213d;
+    margin: 10px 0;
+}
+
+.register-form {
+    margin: 20px auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.register-form>* {
+    width: 100%;
+    margin: 13px 0;
+}
+
+.register-form>*:nth-of-type(3) {
+    width: 100%;
+    margin-top: 0;
+}
+
+.register-avatar-container {
+    width: 30%;
+    margin: 0;
+}
+
+.register-avatar-display {
+    cursor: pointer;
+}
+
+.avatar-label {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.avatar-label::before {
+    content: "select image";
+    position: absolute;
+    font-size: 13px;
+    width: 100%;
+    height: 100%;
+    top: 15px;
+    left: 0;
+    display: none;
+    color: white;
+    z-index: 9;
+}
+
+.avatar-label:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(124, 122, 123, 0.466);
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    display: none;
+}
+
+.file-input {
+    display: none;
+}
+
+.avatar-label:hover::after, .avatar-label:hover::before {
+    display: block;
+    cursor: pointer;
+}
+
+.register-avatar-title {
+    color: #14213d;
+}
+
+.register-name-input {
+    width: 60%;
+    margin: 0;
+}
+
+.register-submit-btn {
+    margin-bottom: 0;
+}
+
+.login-text-link {
+    text-decoration: none;
+    color: #14213d;
+    margin-left: 10px;
+}
+
+.login-text-link:hover {
+    text-decoration: underline;
+}
+
+.register-error {
+    color: rgb(175, 49, 49);
+    text-align: left;
+    margin: 0;
+    font-size: 13px;
+}
+
+/* for iphone 12 and below screen width 375px mobile phones */
+
+@media (max-width: 414px) {
+    .register-content {
+        width: 350px;
+        padding: 1.5em;
+    }
+}
+
+/* for galaxy fold and below screen width 280px mobile phones */
+
+@media (max-width: 280px) {
+    .register-content {
+        width: 250px;
+    }
+}

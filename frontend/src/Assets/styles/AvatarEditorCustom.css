@@ -1,0 +1,87 @@
+.edit-avatar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit-avatar-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #46484b81;
+    width: 100%;
+    height: 100%;
+}
+
+.edit-avatar-container {
+    text-align: center;
+    padding: 2em;
+    background: #E6E6E6;
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10.3px);
+    -webkit-backdrop-filter: blur(10.3px);
+    width: 400px;
+}
+
+.edit-avatar-title {
+    color: #14213d;
+    margin-bottom: 10px;
+}
+
+.rotate-range-container, .scale-range-container {
+    margin: 10px 0;   
+}
+
+.avatar-editor-range {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 7px;
+    background: #14213d;
+    border-radius: 5px;
+    background-size: 70% 100%;
+    background-repeat: no-repeat;
+}
+
+.avatar-editor-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 10px;
+    width: 15px;
+    border-radius: 5px;
+    background: #14213d;
+    box-shadow: 0 0 2px 0 #555;
+    transition: background .3s ease-in-out;
+    cursor: grab;
+}
+  
+.avatar-editor-range::-webkit-slider-runnable-track  {
+    -webkit-appearance: none;
+    box-shadow: none;
+    border: none;
+    background: transparent;
+}
+
+.avatar-editor-interaction-btn {
+    text-align: right;
+}
+
+.cancel-edit-avatar {
+    color: #14213d;
+    cursor: pointer;
+}
+
+.cancel-edit-avatar:hover {
+    text-decoration: underline;
+}
+
+.save-edited-avatar {
+    padding: 10px;
+    margin-left: 10px;
+    text-align: right;
+}
+

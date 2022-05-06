@@ -1,0 +1,87 @@
+.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e5e5e5;
+    height: 100vh;
+}
+
+.login-content {
+    width: 400px;
+    padding: 2em;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.07);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10.3px);
+    -webkit-backdrop-filter: blur(10.3px);
+}
+
+.login-title {
+    color: #14213d;
+    margin: 10px 0;
+}
+
+.login-form {
+    margin-bottom: 15px;
+}
+
+.login-form>* {
+    width: 100%;
+    margin: 23px 0;
+}
+
+.login-form > .form-input-container:nth-child(2){
+    margin-bottom: 5px;
+}
+
+.login-error {
+    color: rgb(175, 49, 49);
+    text-align: left;
+    margin: 0;
+    font-size: 13px;
+}
+
+.login-button {
+    margin-bottom: 0;
+}
+
+.forgot-password-text {
+    text-decoration: none;
+    color: #14213d;
+}
+
+.forgot-password-text:hover {
+    text-decoration: underline;
+}
+
+.register-text {
+    margin: 0;
+    margin-top: 15px;
+}
+
+.register-text-link {
+    text-decoration: none;
+    color: #14213d;
+}
+
+.register-text-link:hover {
+    text-decoration: underline;
+}
+
+/* for iphone 12 and below screen width 375px mobile phones */
+
+@media (max-width: 390px) {
+    .login-content {
+        width: 350px;
+        padding: 1.5em;
+    }
+}
+
+/* for galaxy fold and below screen width 280px mobile phones */
+
+@media (max-width: 280px) {
+    .login-content {
+        width: 250px;
+    }
+}

@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const ExpressError = require("../utils/ExpressError");
 
 const connectDB = async () => {
     try {

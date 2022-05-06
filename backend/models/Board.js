@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
-const User = require("./User");
 
 const boardSchema = new Schema({
     title: {
@@ -10,7 +9,7 @@ const boardSchema = new Schema({
     lists: [
         {
             type: Schema.Types.ObjectId,
-            ref: "Lists"
+            ref: "List"
         }
     ],
     owner: {
@@ -26,7 +25,9 @@ const boardSchema = new Schema({
             role: {
                 type: String,
                 enum: ["editor", "member"]
-            }
+            },
+            _id: false,
+            joined_at: Date
         }
     ],
     visibility: {
@@ -40,17 +41,16 @@ const boardSchema = new Schema({
     },
     invite_link: {
         link: String,
-        set_password: {
-            type: Boolean,
-            defautl: false
-        },
+        set_password: Boolean,
         password: String
-    }
+    },
+    labels: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Label"
+        }
+    ]
 }, { timestamps: true });
-
-boardSchema.post("findOneAndDelete", async function (data, next) {
-    await User.findByIdAndUpdate(data.owner, { $pull: { boards: data.id } });
-});
 
 const Board = mongoose.model("Board", boardSchema);
 

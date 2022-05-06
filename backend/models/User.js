@@ -1,11 +1,12 @@
 const mongoose = require("mongoose");
 const passportLocalMongoose = require('passport-local-mongoose');
 const { Schema } = mongoose;
-const ExpressError = require("../utils/ExpressError");
 
 const userSchema = new Schema({
-    first_name: String,
-    last_name: String,
+    name: {
+        type: String,
+        // required: true
+    },
     email: {
         type: String,
         required: true,
@@ -13,7 +14,7 @@ const userSchema = new Schema({
     },
     avatar: {
         type: String,
-        default: "https://tleliteracy.com/wp-content/uploads/2017/02/default-avatar.png"
+        default: "https://res.cloudinary.com/hein-s-cloud/image/upload/v1651469923/ToDO/Avatars/afzblll1thb9ghyrj71z.png"
     },
     boards: [
         {
@@ -24,16 +25,22 @@ const userSchema = new Schema({
     highlighted_boards: [{
         type: Schema.Types.ObjectId,
         ref: "Board"
-    }]
+    }],
+    to_be_done: [
+        {
+            card: {
+                type: Schema.Types.ObjectId,
+                ref: "Card"
+            },
+            status: {
+                type: Boolean,
+                default: false
+            }
+        }
+    ]
 }, { timestamps: true });
 
 userSchema.plugin(passportLocalMongoose, { usernameQueryFields: ["email"] });
-
-userSchema.pre("register", async function (next, data) {
-    const user = await this.findOne({ $or: [{ email: data.email }, { username: data.username }] });
-    if (user) throw new ExpressError("username or email already exists", 400)
-    next();
-})
 
 const User = mongoose.model("User", userSchema);
 
